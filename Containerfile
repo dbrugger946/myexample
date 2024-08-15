@@ -1,7 +1,5 @@
 FROM registry.access.redhat.com/ubi8/dotnet-80-runtime AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 FROM registry.access.redhat.com/ubi8/dotnet-80 AS build
 USER 0
