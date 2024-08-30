@@ -5,6 +5,7 @@
 ### This example follows more expanded explanations collated from the following sources.
 *NOTE: Given .NET's cross platform support and common SDK and runtime, in most cases these source guides are OS agnostic, or can be easily applied across Mac, Linux, and Windows inner loop development environments.*
 
+#### Relevant Reference Material 
 Dockerfile/Containerfile Approach
 - .NET on Red Hat Enterprise Linux https://developers.redhat.com/cheat-sheets/net-core-red-hat-enterprise-linux
 - Getting started with .NET on RHEL 9 https://docs.redhat.com/en/documentation/net/8.0/html-single/getting_started_with_.net_on_rhel_9/index
@@ -63,6 +64,7 @@ To locally build a container image try the following (you may need to adjust syn
 - To run the container with **podman** : ```podman run -p 8080:8080 myexample```  
 - *OR* To run the container with **docker** : ```docker run -p 8080:8080 myexample```
 - You can see the results by running ```localhost:8080/weatherforecast``` in your browser or as a curl command.
+- After you are finished you can stop the container and delete it.
 
 
 #### .NET SDK CLI **dotnet publish** command Approach 
@@ -70,13 +72,17 @@ This is a newer approach that is provided directly from the .NET 8.0 SDK. .NET d
 
 In order to kick off an image build the documentation describes how someone can pass in parameters and settings at the commandline.  One can also pass in property files with project level settings, just as can normally be done with a .NET C# project.  In .NET there is a hierarchy for where and how property files can be located and called.  The above links go into this in detail.
 
-For purposes of this example a *Directory.Build.props* file was created in the base directory and in it a source builder image and supported runtime container OS's were set. Other settings are possible such as image name and tag.
+For purposes of this example a *Directory.Build.props* file was created in the base directory and in it a source builder image and supported runtime container OS's were set. Other settings are possible such as image name and tag.  Many times these properties are set to ensure the container image is built to run on specific hardware architectures.  For example, if they are to be deployed onto Kubernetes environments.
 
 To build this example using this approach run:  
-```dotnet publish myexample.csproj -t:PublishContainer```
+
+```dotnet publish myexample.csproj -t:PublishContainer```  
+
 This will create an image with the name being the project name.  As mentioned, the .NET documentation offers many ways to adjust settings and paramaters.
 
-You can then run the container similiar to the docker approach above, but replacing the -t parameter with the project name and tag  i.e.  *-t myexample:1.1* .
+You can then run the container similiar to the docker approach above, but adjusting the name so it uses the tag *1.1* set in the *Directory.Build.props* file
+
+For example:  ```docker run -p 8080:8080 myexample:1.1```
 
 ### Next Steps
 This example has focused on a couple of approaches to locally build .NET containerized services on a local developer environment.  A logical follow on is to deploy .NET applications to an Application Platform like Red Hat OpenShift, which follows a Kubernetes approach to managing containers.  There are several approaches to do this, and can be covered in other example projects.

@@ -1,7 +1,7 @@
 <Project>
    <PropertyGroup>
       <ContainerBaseImage>registry.access.redhat.com/ubi8/dotnet-80-runtime:latest</ContainerBaseImage>
-      <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+      <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier> -->
       <!-- <RuntimeIdentifier>osx-arm64</RuntimeIdentifier> -->
       <ContainerImageTag>1.1</ContainerImageTag>
    </PropertyGroup>
